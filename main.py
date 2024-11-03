@@ -10,7 +10,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-BACKEND_URL = os.getend("BACKEND_URL")
+BACKEND_URL = os.getenv("BACKEND_URL")
 MEDIA_URL = os.getenv("MEDIA_URL")
 
 app.add_middleware(
@@ -32,10 +32,10 @@ async def login(request: Request):
     form_data = await request.form()
     username = form_data.get("username")
     password = form_data.get("password")
-    print (f"I WILL CALL {BACKEND_PRIVATE_DOMAIN}/token")
+    print (f"I WILL CALL {BACKEND_URL}/token")
     # Send login credentials to external auth backend
     async with httpx.AsyncClient() as client:
-        response = await client.post(f"{BACKEND_PRIVATE_DOMAIN}/token", data={"username": username, "password": password})
+        response = await client.post(f"{BACKEND_URL}/token", data={"username": username, "password": password})
     if response.status_code == 200:
         # Extract JWT token from the response
         jwt_token = response.json()["access_token"]
@@ -59,7 +59,7 @@ async def get_clients(request: Request):
     # Use JWT token to fetch the user's clients from the backend
     headers = {"Authorization": f"Bearer {jwt_token}"}
     async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BACKEND_PRIVATE_DOMAIN}/clients", headers=headers)
+        response = await client.get(f"{BACKEND_URL}/clients", headers=headers)
 
     # Process the clients data if the response is successful
     if response.status_code == 200:
@@ -79,7 +79,7 @@ async def get_client_orders(request: Request, client_id: str):
     # Use JWT token to fetch the client's orders from the backend
     headers = {"Authorization": f"Bearer {jwt_token}"}
     async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BACKEND_PRIVATE_DOMAIN}/clients/{client_id}/orders", headers=headers)
+        response = await client.get(f"{BACKEND_URL}/clients/{client_id}/orders", headers=headers)
 
     # Process the orders data if the response is successful
     if response.status_code == 200:

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Clients</title>
+<!-- Start of Selection -->
+</head>
+<body>
+    <h1>Your Clients</h1>
+    <ul>
+        {% for client in clients %}
+        <li><a href="/clients/{{ client.id }}/orders">{{ client.name }} - {{ client.phone_number }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+<!-- End of Selection -->

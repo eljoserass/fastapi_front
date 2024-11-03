@@ -32,7 +32,7 @@ async def login(request: Request):
     form_data = await request.form()
     username = form_data.get("username")
     password = form_data.get("password")
-   
+    print (f"I WILL CALL {f"{BACKEND_PRIVATE_DOMAIN}/token"}")
     # Send login credentials to external auth backend
     async with httpx.AsyncClient() as client:
         response = await client.post(f"{BACKEND_PRIVATE_DOMAIN}/token", data={"username": username, "password": password})

@@ -10,7 +10,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-BACKEND_PRIVATE_DOMAIN = f"{os.getenv('BACKEND_PRIVATE_DOMAIN')}:{os.getenv('fastapi_PORT')}"
+BACKEND_URL = os.getend("BACKEND_URL")
 MEDIA_URL = os.getenv("MEDIA_URL")
 
 app.add_middleware(

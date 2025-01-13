@@ -87,3 +87,9 @@ async def get_client_orders(request: Request, client_id: str):
         return templates.TemplateResponse("client_orders.html", {"request": request, "orders": orders_data, "media_url": MEDIA_URL})
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to retrieve orders data")
+
+
+@app.get("/")
+async def read_root():
+    # render html saying "message to orders home page"
+    return {"message": "Welcome to the orders home page"}

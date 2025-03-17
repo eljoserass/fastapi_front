@@ -4,15 +4,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Clients</title>
-<!-- Start of Selection -->
+    <style>
+        /* Color variables */
+        :root {
+            --primary: #263f5c;
+            --secondary: #435e7e;
+            --accent: #f39c12;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+        }
+        
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        h1 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        /* Client list */
+        .client-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .client-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .client-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .client-link {
+            display: flex;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .client-link:hover {
+            text-decoration: none;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .client-details {
+            flex-grow: 1;
+        }
+        
+        .client-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .client-phone {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .arrow-icon {
+            color: var(--accent);
+            font-size: 20px;
+        }
+        
+        /* Search box */
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .empty-icon {
+            font-size: 50px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .client-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .client-avatar {
+                margin-bottom: 10px;
+            }
+            
+            .client-link {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .arrow-icon {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Clients</h1>
-    <ul>
-        {% for client in clients %}
-        <li><a href="/clients/{{ client.id }}/orders">{{ client.name }} - {{ client.phone_number }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Your Clients</h1>
+        
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search clients by name or phone number..." id="clientSearch">
+        </div>
+        
+        {% if clients and clients|length > 0 %}
+        <ul class="client-list" id="clientList">
+            {% for client in clients %}
+            <li class="client-card">
+                <a href="/clients/{{ client.id }}/orders" class="client-link">
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            {{ client.name[:1] if client.name else "?" }}
+                        </div>
+                        <div class="client-details">
+                            <div class="client-name">{{ client.name or "Unknown Client" }}</div>
+                            <div class="client-phone">{{ client.phone_number or "No phone number" }}</div>
+                        </div>
+                    </div>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <h2>No clients yet</h2>
+            <p>Clients will appear here once mechanics start sending WhatsApp messages to your business number.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Simple client-side search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('clientSearch');
+            const clientList = document.getElementById('clientList');
+            
+            if (searchInput && clientList) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const clientItems = clientList.getElementsByTagName('li');
+                    
+                    for (let i = 0; i < clientItems.length; i++) {
+                        const clientInfo = clientItems[i].textContent.toLowerCase();
+                        
+                        if (clientInfo.includes(searchTerm)) {
+                            clientItems[i].style.display = '';
+                        } else {
+                            clientItems[i].style.display = 'none';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
-<!-- End of Selection -->

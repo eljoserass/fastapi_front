@@ -1,27 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Orders</title>
-</head>
-<body>
-    <h1>Client Orders</h1>
-    <ul>
-        {% for order in orders %}
-        <li>
-            Status: {{ order.status }} - Car Plate: {{ order.car_plate }} - Car Brand: {{ order.car_brand }} - Car Model: {{ order.car_model }} - Requirements: {{ order.order_requirements | join(', ') }}
-            {% if order.reference_media_files %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Client Orders</title>
+    </head>
+    <body>
+        <h1>Client Orders</h1>
+        <ul>
+            {% for order in orders %}
+            <li>
+                Status: {{ order.status }} - Car Frame {{ order.car_frame }} -
+                Car Plate: {{ order.car_plate }} - Car Brand: {{ order.car_brand
+                }} - Car Model: {{ order.car_model }} - Requirements: {{
+                order.order_requirements | join(', ') }} {% if
+                order.reference_media_files %}
                 <div>
                     {% for media_file in order.reference_media_files %}
-                        <img src="{{ media_url }}/{{ media_file }}" alt="Order Image" style="max-width: 200px; max-height: 200px;">
+                    <img
+                        src="{{ media_url }}/{{ media_file }}"
+                        alt="Order Image"
+                        style="max-width: 200px; max-height: 200px"
+                    />
                     {% endfor %}
                 </div>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-    <br>
-    <a href="/clients">Back to Clients</a>
-</body>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <br />
+        <a href="/clients">Back to Clients</a>
+    </body>
 </html>

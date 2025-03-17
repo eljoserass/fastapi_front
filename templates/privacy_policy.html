@@ -3,28 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
+    <title>Privacy Policy - Manolito</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            padding: 40px 0;
+        }
+        .privacy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light);
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light);
+        }
+        .effective-date {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+    </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                <span class="auto-parts-icon" style="margin-bottom: 0;">🔧</span> Manolito
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#how-it-works">How It Works</a></li>
+                <li><a href="/login" class="btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
     
-    <h2>Information We Collect</h2>
-    <p>We collect information that you provide directly to us, including:</p>
-    <ul>
-        <li>Account information</li>
-        <li>Client information</li>
-        <li>Order details</li>
-        <li>Media files related to orders</li>
-    </ul>
-
-    <h2>How We Use Your Information</h2>
-    <p>We use the information we collect to:</p>
-    <ul>
-        <li>Provide and maintain our services</li>
-        <li>Process and manage orders</li>
-        <li>Communicate with clients</li>
-    </ul>
-
-    <a href="/">Back to Home</a>
+    <div class="privacy-container">
+        <h1>Privacy Policy</h1>
+        
+        <p>This Privacy Policy describes how Manolito ("we," "our," or "us") collects, uses, and discloses your information in connection with our auto parts order management platform (the "Service"). By using our Service, you agree to the collection and use of information in accordance with this policy.</p>
+        
+        <h2>1. Information We Collect</h2>
+        
+        <h3>1.1 Account Information</h3>
+        <p>When you register for our Service, we collect basic information required to create your account, including your name, phone number, email address, and password.</p>
+        
+        <h3>1.2 WhatsApp Integration Data</h3>
+        <p>Our Service integrates with the WhatsApp Business Platform to process and organize incoming messages. With your explicit permission, we:</p>
+        <ul>
+            <li>Receive incoming messages from your selected WhatsApp contacts via a registered webhook</li>
+            <li>Process message content using artificial intelligence to identify and organize order details</li>
+            <li>Receive media files (images) shared by your contacts via WhatsApp</li>
+        </ul>
+        <p><strong>Important:</strong> We do not permanently store the content of WhatsApp messages. The processing of message content occurs in real-time, and we only retain the structured data extracted from these messages (such as part names, car information, and order details). Any media files are only retained for 48 hours to allow for processing and organization.</p>
+        
+        <h3>1.3 Client Information</h3>
+        <p>We collect and organize information about your clients (mechanics), including their WhatsApp contact information and order history, to help you manage your business relationships.</p>
+        
+        <h3>1.4 Order Details</h3>
+        <p>We extract and process order-related information from WhatsApp messages, including:</p>
+        <ul>
+            <li>Car identification details (models, plates, brands)</li>
+            <li>Part requirements and specifications</li>
+            <li>Order status and history</li>
+        </ul>
+        
+        <h3>1.5 Media Files</h3>
+        <p>With your permission, we process media files (such as images of car parts or vehicles) shared via WhatsApp. These files are:</p>
+        <ul>
+            <li>Stored temporarily (maximum 48 hours) for processing and organization</li>
+            <li>Processed to extract relevant information</li>
+            <li>Organized within your account for easy reference</li>
+        </ul>
+        
+        <h2>2. How We Use Your Information</h2>
+        
+        <p>We use the information we collect to:</p>
+        <ul>
+            <li>Provide, maintain, and improve our Service</li>
+            <li>Process and organize incoming WhatsApp messages into structured order data</li>
+            <li>Identify car details, parts, and requirements from messages and media</li>
+            <li>Display organized order data in an accessible dashboard</li>
+            <li>Communicate with you about your account, our Services, and provide customer support</li>
+            <li>Detect and prevent fraud, abuse, security incidents, and other harmful activity</li>
+            <li>Conduct research and development to improve our Services</li>
+            <li>Comply with legal obligations</li>
+        </ul>
+        
+        <h2>3. WhatsApp Business Platform Compliance</h2>
+        
+        <p>Our use of the WhatsApp Business Platform complies with Meta's terms and policies. Specifically:</p>
+        <ul>
+            <li>We only process messages from contacts you have explicitly selected for integration</li>
+            <li>We do not permanently store the content of WhatsApp messages</li>
+            <li>Media files are only retained for a maximum of 48 hours</li>
+            <li>We maintain appropriate security measures to protect any data processed through the WhatsApp integration</li>
+            <li>We only use message data for the purpose of providing our Service to you</li>
+            <li>We do not use WhatsApp data for advertising purposes</li>
+        </ul>
+        
+        <h2>4. Information Sharing and Disclosure</h2>
+        
+        <p>We do not sell, rent, or share your personal information with third parties except as described in this policy. We may share information in the following circumstances:</p>
+        
+        <h3>4.1 Service Providers</h3>
+        <p>We may share information with third-party vendors, service providers, and other business partners who perform services on our behalf, such as cloud storage providers, data analytics services, and AI processing services.</p>
+        
+        <h3>4.2 Compliance with Laws</h3>
+        <p>We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., a court or government agency).</p>
+        
+        <h3>4.3 Business Transfers</h3>
+        <p>If we are involved in a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of that transaction. We will notify you via email and/or a prominent notice on our website of any change in ownership or uses of your personal information.</p>
+        
+        <h3>4.4 With Your Consent</h3>
+        <p>We may share your information with third parties when we have your consent to do so.</p>
+        
+        <h2>5. Data Security</h2>
+        
+        <p>We implement appropriate technical and organizational measures to protect the security of your personal information. However, please be aware that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
+        
+        <h2>6. Your Rights and Choices</h2>
+        
+        <p>Depending on your location, you may have certain rights regarding your personal information, including:</p>
+        <ul>
+            <li>The right to access the personal information we have about you</li>
+            <li>The right to rectify inaccurate personal information</li>
+            <li>The right to delete your personal information</li>
+            <li>The right to restrict or object to our processing of your personal information</li>
+            <li>The right to data portability</li>
+            <li>The right to withdraw consent</li>
+        </ul>
+        <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section below.</p>
+        
+        <h2>7. Data Retention</h2>
+        
+        <p>We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy or as required by law. WhatsApp media files are retained for a maximum of 48 hours. Account information and structured order data are retained for as long as you maintain an active account with us, and for a reasonable period thereafter for legal and operational purposes.</p>
+        
+        <h2>8. International Transfers</h2>
+        
+        <p>Your information may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those in your jurisdiction. If you are located outside the United States and choose to provide information to us, please note that we transfer the information to the United States and process it there.</p>
+        
+        <h2>9. Children's Privacy</h2>
+        
+        <p>Our Service is not directed to persons under the age of 18. We do not knowingly collect personal information from children under 18. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we can take appropriate steps.</p>
+        
+        <h2>10. Changes to This Privacy Policy</h2>
+        
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "effective date" at the bottom of this policy. You are advised to review this Privacy Policy periodically for any changes.</p>
+        
+        <h2>11. Contact Us</h2>
+        
+        <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
+        <p>
+            Manolito<br>
+            Email: privacy@manolito.com<br>
+            Address: [Your Business Address]
+        </p>
+        
+        <div class="effective-date">
+            <p>Effective Date: March 17, 2025</p>
+        </div>
+        
+        <div class="bottom-nav">
+            <a href="/" class="btn">Back to Home</a>
+            <a href="/login" class="btn btn-accent">Login</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer mt-4">
+        <div class="container-fluid">
+            <p>© 2025 Manolito - Auto Parts Order Management</p>
+        </div>
+    </footer>
 </body>
-</html> 
+</html>

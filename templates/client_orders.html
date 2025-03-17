@@ -1,34 +1,451 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Client Orders</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Orders</title>
+    <style>
+        /* Color variables */
+        :root {
+            --primary: #263f5c;
+            --secondary: #435e7e;
+            --accent: #f39c12;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+        
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        h1 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .back-icon {
+            margin-right: 8px;
+        }
+        
+        /* Orders list */
+        .orders-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .order-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+        
+        .order-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-new {
+            background-color: rgba(52, 152, 219, 0.15);
+            color: #3498db;
+        }
+        
+        .status-processing, .status-in-progress {
+            background-color: rgba(243, 156, 18, 0.15);
+            color: #f39c12;
+        }
+        
+        .status-completed, .status-delivered {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+        }
+        
+        .status-cancelled, .status-failed {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+        }
+        
+        .order-id {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .order-content {
+            padding: 20px;
+        }
+        
+        /* Car information */
+        .car-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .car-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            margin-top: 5px;
+            color: var(--primary);
+        }
+        
+        .car-details {
+            flex: 1;
+        }
+        
+        .car-details h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+        
+        .car-details-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .car-detail-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .car-detail-label {
+            font-weight: 600;
+            margin-right: 5px;
+            color: var(--secondary);
+        }
+        
+        .car-plate {
+            display: inline-block;
+            background-color: #ffdd57;
+            color: #664d03;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* Requirements section */
+        .requirements-section {
+            margin-bottom: 20px;
+        }
+        
+        .requirements-section h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+        }
+        
+        .requirements-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .requirement-item {
+            background-color: var(--light);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .requirement-icon {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+        
+        /* Media section */
+        .media-section h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+        }
+        
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .media-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            aspect-ratio: 1;
+        }
+        
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .media-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .empty-icon {
+            font-size: 50px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .car-info {
+                flex-direction: column;
+            }
+            
+            .car-icon {
+                margin-bottom: 10px;
+            }
+            
+            .car-details-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .media-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/clients" class="back-link">
+            <span class="back-icon">←</span> Back to Clients
+        </a>
+        
         <h1>Client Orders</h1>
-        <ul>
+        
+        {% if orders and orders|length > 0 %}
+        <ul class="orders-list">
             {% for order in orders %}
-            <li>
-                Status: {{ order.status }} - Car Frame {{ order.car_frame }} -
-                Car Plate: {{ order.car_plate }} - Car Brand: {{ order.car_brand
-                }} - Car Model: {{ order.car_model }} - Requirements: {{
-                order.order_requirements | join(', ') }} {% if
-                order.reference_media_files %}
-                <div>
-                    {% for media_file in order.reference_media_files %}
-                    <img
-                        src="{{ media_url }}/{{ media_file }}"
-                        alt="Order Image"
-                        style="max-width: 200px; max-height: 200px"
-                    />
-                    {% endfor %}
+            <li class="order-card">
+                <div class="order-header">
+                    <span class="order-status status-{{ order.status|lower if order.status else 'new' }}">
+                        {{ order.status or 'New' }}
+                    </span>
+                    <span class="order-id">Order #{{ loop.index }}</span>
                 </div>
-                {% endif %}
+                
+                <div class="order-content">
+                    <!-- Car Information -->
+                    <div class="car-info">
+                        <div class="car-icon">🚗</div>
+                        <div class="car-details">
+                            <h3>Vehicle Information</h3>
+                            
+                            <div class="car-details-row">
+                                {% if order.car_plate %}
+                                <div class="car-detail-item">
+                                    <span class="car-detail-label">Plate:</span>
+                                    <span class="car-plate">{{ order.car_plate }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if order.car_brand %}
+                                <div class="car-detail-item">
+                                    <span class="car-detail-label">Brand:</span>
+                                    {{ order.car_brand }}
+                                </div>
+                                {% endif %}
+                                
+                                {% if order.car_model %}
+                                <div class="car-detail-item">
+                                    <span class="car-detail-label">Model:</span>
+                                    {{ order.car_model }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            {% if order.car_frame %}
+                            <div class="car-detail-item">
+                                <span class="car-detail-label">Frame:</span>
+                                {{ order.car_frame }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Requirements -->
+                    <div class="requirements-section">
+                        <h3>Requested Parts</h3>
+                        
+                        {% if order.order_requirements and order.order_requirements|length > 0 %}
+                        <ul class="requirements-list">
+                            {% for requirement in order.order_requirements %}
+                            <li class="requirement-item">
+                                <span class="requirement-icon">🔧</span>
+                                {{ requirement }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No specific parts requested</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Media Files -->
+                    {% if order.reference_media_files and order.reference_media_files|length > 0 %}
+                    <div class="media-section">
+                        <h3>Reference Images</h3>
+                        
+                        <div class="media-gallery">
+                            {% for media_file in order.reference_media_files %}
+                            <div class="media-item" onclick="openModal('{{ media_url }}/{{ media_file }}')">
+                                <img src="{{ media_url }}/{{ media_file }}" alt="Reference Image">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
             </li>
             {% endfor %}
         </ul>
-        <br />
-        <a href="/clients">Back to Clients</a>
-    </body>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📦</div>
+            <h2>No Orders Found</h2>
+            <p>This client doesn't have any orders yet.</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <script>
+        // Image modal functionality
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
 </html>

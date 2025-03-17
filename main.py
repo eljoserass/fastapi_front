@@ -89,7 +89,10 @@ async def get_client_orders(request: Request, client_id: str):
         raise HTTPException(status_code=response.status_code, detail="Failed to retrieve orders data")
 
 
-@app.get("/")
-async def read_root():
-    # render html saying "message to orders home page"
-    return {"message": "Welcome to the orders home page"}
+@app.get("/", response_class=HTMLResponse)
+async def landing_page(request: Request):
+    return templates.TemplateResponse("landing.html", {"request": request})
+
+@app.get("/privacy-policy", response_class=HTMLResponse)
+async def privacy_policy(request: Request):
+    return templates.TemplateResponse("privacy_policy.html", {"request": request})

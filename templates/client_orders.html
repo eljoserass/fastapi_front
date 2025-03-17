@@ -181,35 +181,103 @@
             letter-spacing: 1px;
         }
         
-        /* Requirements section */
-        .requirements-section {
-            margin-bottom: 20px;
+        /* Parts list styling */
+        .parts-section {
+            margin-bottom: 30px;
         }
         
-        .requirements-section h3 {
-            margin: 0 0 15px 0;
+        .parts-section h3 {
             color: var(--primary);
+            margin-bottom: 15px;
         }
         
-        .requirements-list {
+        .parts-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
-            padding: 0;
+            flex-direction: column;
+            gap: 20px;
         }
         
-        .requirement-item {
-            background-color: var(--light);
-            padding: 8px 12px;
-            border-radius: 6px;
+        .part-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .part-header {
             display: flex;
             align-items: center;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
         }
         
-        .requirement-icon {
-            margin-right: 8px;
+        .part-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .part-name {
+            margin: 0;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .part-references {
+            padding: 15px;
+        }
+        
+        .part-references h5 {
+            margin: 0 0 10px 0;
             color: var(--secondary);
+            font-size: 0.95rem;
+        }
+        
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .reference-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .reference-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .reference-number {
+            display: inline-block;
+            background-color: #f1f8ff;
+            color: #0366d6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            border: 1px solid #c8e1ff;
+        }
+        
+        .reference-description {
+            color: var(--dark);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .part-no-reference {
+            padding: 15px;
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
         }
         
         /* Media section */
@@ -374,19 +442,43 @@
                         </div>
                     </div>
                     
-                    <!-- Requirements -->
-                    <div class="requirements-section">
+                    <!-- Parts Section -->
+                    <div class="parts-section">
                         <h3>Requested Parts</h3>
                         
                         {% if order.order_requirements and order.order_requirements|length > 0 %}
-                        <ul class="requirements-list">
-                            {% for requirement in order.order_requirements %}
-                            <li class="requirement-item">
-                                <span class="requirement-icon">🔧</span>
-                                {{ requirement }}
-                            </li>
+                        <div class="parts-list">
+                            {% for requirements_group in order.order_requirements %}
+                                {% for part_dict in requirements_group %}
+                                    {% for part_name, part_info in part_dict.items() %}
+                                    <div class="part-card">
+                                        <div class="part-header">
+                                            <span class="part-icon">🔧</span>
+                                            <h4 class="part-name">{{ part_name|title }}</h4>
+                                        </div>
+                                        
+                                        {% if part_info.references and part_info.references|length > 0 %}
+                                        <div class="part-references">
+                                            <h5>Reference Numbers</h5>
+                                            <ul class="reference-list">
+                                                {% for reference in part_info.references %}
+                                                <li class="reference-item">
+                                                    <div class="reference-number">{{ reference.part_refernce }}</div>
+                                                    <div class="reference-description">{{ reference.reference_name }}</div>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% else %}
+                                        <div class="part-no-reference">
+                                            <p>No specific reference numbers available</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                {% endfor %}
                             {% endfor %}
-                        </ul>
+                        </div>
                         {% else %}
                         <p>No specific parts requested</p>
                         {% endif %}

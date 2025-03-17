@@ -3,15 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Our Service</title>
+    <title>Manolito - Auto Parts Order Management</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <meta name="description" content="Manolito - The smart order management system for auto parts retailers">
 </head>
 <body>
-    <h1>Welcome to Our Order Management System</h1>
-    <p>Streamline your business operations with our powerful order management solution.</p>
-    
-    <div class="actions">
-        <a href="/login">Login</a>
-        <a href="/privacy-policy">Privacy Policy</a>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                <span class="auto-parts-icon" style="margin-bottom: 0;">🔧</span> Manolito
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="/login" class="btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container-fluid">
+            <h1>Smart Management for Auto Parts Orders</h1>
+            <p>Turn unstructured WhatsApp messages into organized order data. Manage orders efficiently by automatically detecting car plates, parts, and images.</p>
+            <div class="hero-buttons">
+                <a href="/login" class="btn">Get Started</a>
+                <a href="#features" class="btn btn-accent">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container-fluid">
+            <h2 class="text-center mb-4">Key Features</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="feature-icon">📱</div>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Connect your WhatsApp business account and automatically organize incoming messages from mechanics into structured orders.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Intelligent Parsing</h3>
+                    <p>Our AI automatically identifies car models, license plates, and requested parts from conversation texts and images.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Order Dashboard</h3>
+                    <p>See all your clients and their orders in one place with a clean, organized interface that shows you exactly what each mechanic needs.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Media Management</h3>
+                    <p>Automatically categorize and organize images of parts, cars, and license plates sent by mechanics for easy reference.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Updates</h3>
+                    <p>Orders update in real-time as mechanics send new messages or modify their requests.</p>
+                </div>
+                <div class="card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Business Analytics</h3>
+                    <p>Track your most frequent clients, popular parts, and order patterns to better manage your inventory.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container-fluid">
+            <h2 class="text-center mb-4">How It Works</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Connect Your Account</h3>
+                    <p>Sign up and connect your WhatsApp Business account to our platform.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Receive Messages</h3>
+                    <p>Mechanics send you messages and images as they normally would.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Automatic Processing</h3>
+                    <p>Our AI processes the messages to identify cars, parts, and order details.</p>
+                </div>
+                <div class="card">
+                    <h3>4. Organized Dashboard</h3>
+                    <p>Access your dashboard to see all orders organized by client, with all details clearly displayed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (Placeholder) -->
+    <section class="testimonials mt-4 mb-4">
+        <div class="container-fluid">
+            <h2 class="text-center mb-4">What Our Users Say</h2>
+            <div class="grid">
+                <div class="card">
+                    <p>"This system has saved me hours of work every day. Now I can focus on finding parts instead of deciphering WhatsApp messages."</p>
+                    <p><strong>- José Martínez, Auto Parts Retailer</strong></p>
+                </div>
+                <div class="card">
+                    <p>"The automatic plate recognition is incredibly accurate. It's like having a personal assistant managing all my client communications."</p>
+                    <p><strong>- María González, Shop Owner</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta mt-4 mb-4">
+        <div class="container-fluid text-center">
+            <h2>Ready to streamline your order management?</h2>
+            <p>Join hundreds of auto parts retailers who are saving time and increasing accuracy.</p>
+            <a href="/login" class="btn mt-2">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer mt-4">
+        <div class="container-fluid">
+            <p>© 2025 Manolito - Auto Parts Order Management</p>
+            <p><a href="/privacy-policy">Privacy Policy</a></p>
+        </div>
+    </footer>
 </body>
 </html>

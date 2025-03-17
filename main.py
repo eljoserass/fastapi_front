@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException, status, Depends
 from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 import httpx
 import os
@@ -8,6 +9,7 @@ import os
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 BACKEND_URL = os.getenv("BACKEND_URL")

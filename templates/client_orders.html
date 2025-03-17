@@ -458,53 +458,61 @@
                         <div class="parts-section">
                             <h3>Requested Parts</h3>
 
-                            {% if order.order_requirements and
-                            order.order_requirements|length > 0 %}
+                            {% if order.order_requirements %}
                             <div class="parts-list">
-                                {% for requirements_group in
-                                order.order_requirements %} {% for part_dict in
-                                requirements_group %} {% for part_name,
-                                part_info in part_dict.items() %}
-                                <div class="part-card">
-                                    <div class="part-header">
-                                        <span class="part-icon">🔧</span>
-                                        <h4 class="part-name">
-                                            {{ part_name|title }}
-                                        </h4>
-                                    </div>
+                                <!-- Try to handle the expected structure -->
+                                {% if order.order_requirements is iterable and order.order_requirements is not string %}
+                                    <!-- First try the expected nested structure -->
+                                    {% for requirements_group in order.order_requirements %}
+                                        {% if requirements_group is iterable and requirements_group is not string %}
+                                            {% for part_dict in requirements_group %}
+                                                {% if part_dict is mapping %}
+                                                    {% for part_name, part_info in part_dict.items() %}
+                                                <div class="part-card">
+                                                    <div class="part-header">
+                                                        <span class="part-icon">🔧</span>
+                                                        <h4 class="part-name">{{ part_name|title }}</h4>
+                                                    </div>
 
-                                    {% if part_info.references and
-                                    part_info.references|length > 0 %}
-                                    <div class="part-references">
-                                        <h5>Reference Numbers</h5>
-                                        <ul class="reference-list">
-                                            {% for reference in
-                                            part_info.references %}
-                                            <li class="reference-item">
-                                                <div class="reference-number">
-                                                    {{ reference.part_reference
-                                                    }}
+                                                    {% if part_info.references and part_info.references|length > 0 %}
+                                                    <div class="part-references">
+                                                        <h5>Reference Numbers</h5>
+                                                        <ul class="reference-list">
+                                                            {% for reference in part_info.references %}
+                                                            <li class="reference-item">
+                                                                <div class="reference-number">
+                                                                    {{ reference.part_refernce if reference.part_refernce is defined else reference.part_reference if reference.part_reference is defined else "N/A" }}
+                                                                </div>
+                                                                <div class="reference-description">
+                                                                    {{ reference.reference_name if reference.reference_name is defined else "No description available" }}
+                                                                </div>
+                                                            </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                    {% else %}
+                                                    <div class="part-no-reference">
+                                                        <p>No specific reference numbers available</p>
+                                                    </div>
+                                                    {% endif %}
                                                 </div>
-                                                <div
-                                                    class="reference-description"
-                                                >
-                                                    {{ reference.reference_name
-                                                    }}
-                                                </div>
-                                            </li>
+                                                    {% endfor %}
+                                                {% endif %}
                                             {% endfor %}
-                                        </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <!-- Fallback for unexpected structure -->
+                                    <div class="part-card">
+                                        <div class="part-header">
+                                            <span class="part-icon">ℹ️</span>
+                                            <h4 class="part-name">Order Requirements</h4>
+                                        </div>
+                                        <div class="part-content" style="padding: 15px;">
+                                            <p>{{ order.order_requirements }}</p>
+                                        </div>
                                     </div>
-                                    {% else %}
-                                    <div class="part-no-reference">
-                                        <p>
-                                            No specific reference numbers
-                                            available
-                                        </p>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% endfor %} {% endfor %} {% endfor %}
+                                {% endif %}
                             </div>
                             {% else %}
                             <p>No specific parts requested</p>
